@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You 💕</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+    body, html { width: 100%; height: 100%; background: #ffe6f0; display: flex; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
+    
+    #startScreen, #slideshow, #endScreen { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1s ease; }
+    #slideshow, #endScreen { opacity: 0; pointer-events: none; }
+    
+    button { margin-top: 20px; padding: 15px 30px; font-size: 20px; background: #ff4da6; color: white; border: none; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+    button:hover { background: #ff1a75; }
+    
+    img { width: 300px; height: 300px; border-radius: 20px; object-fit: cover; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: transform 0.5s ease, opacity 1s ease; opacity: 0; }
+    
+    h1, h2 { color: #ff0066; text-shadow: 1px 1px 2px #fff; }
+    #compliment { margin-top: 10px; font-size: 22px; color: #990033; min-height: 30px; opacity: 0; transition: opacity 1s ease; }
+  </style>
+</head>
+<body>
+
+  <!-- Start Screen -->
+  <div id="startScreen">
+    <h1>This is for you 💕</h1>
+    <button onclick="startSlideshow()">Click Me</button>
+  </div>
+
+  <!-- Slideshow -->
+  <div id="slideshow">
+    <img id="slideImage" src="" alt="Her Photo">
+    <div id="compliment"></div>
+  </div>
+
+  <!-- End Screen -->
+  <div id="endScreen">
+    <h1>Thank you for being in my life 💖</h1>
+    <h2>Thanks for everything you did 💕</h2>
+  </div>
+
+  <script>
+    const photos = [
+      'images/photo1.jpg',
+      'images/photo2.jpg',
+      'images/photo3.jpg'
+    ];
+
+    const compliments = [
+      "You light up my world 🌟",
+      "Your smile is everything 😊",
+      "Being with you feels like home 💖",
+      "You are my sunshine ☀️"
+    ];
+
+    let currentIndex = 0;
+    const slideImage = document.getElementById('slideImage');
+    const complimentDiv = document.getElementById('compliment');
+
+    function startSlideshow() {
+      document.getElementById('startScreen').style.opacity = 0;
+      setTimeout(() => {
+        document.getElementById('startScreen').style.display = 'none';
+        document.getElementById('slideshow').style.opacity = 1;
+        document.getElementById('slideshow').style.pointerEvents = 'auto';
+        showSlide();
+      }, 1000);
+    }
+
+    function showSlide() {
+      if(currentIndex < photos.length) {
+        // Set image and fade in
+        slideImage.style.opacity = 0;
+        complimentDiv.style.opacity = 0;
+        slideImage.src = photos[currentIndex];
+        complimentDiv.innerText = compliments[currentIndex % compliments.length];
+        setTimeout(() => {
+          slideImage.style.opacity = 1;
+          complimentDiv.style.opacity = 1;
+        }, 200);
+
+        currentIndex++;
+        setTimeout(showSlide, 3500); // 3.5 seconds per slide
+      } else {
+        endScreen();
+      }
+    }
+
+    function endScreen() {
+      document.getElementById('slideshow').style.opacity = 0;
+      document.getElementById('slideshow').style.pointerEvents = 'none';
+      setTimeout(() => {
+        document.getElementById('endScreen').style.opacity = 1;
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
 
