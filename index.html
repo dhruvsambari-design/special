@@ -21,7 +21,7 @@
 </head>
 <body>
 
-  <!-- Music (starts when button clicked) -->
+  <!-- Music (starts on first click) -->
   <audio id="bgMusic" src="music/tummile-cut.mp3" loop></audio>
 
   <!-- Start Screen -->
@@ -43,6 +43,7 @@
   </div>
 
   <script>
+    // Photos and compliments
     const photos = [
       'images/photo1.jpeg',
       'images/photo2.jpeg',
@@ -66,20 +67,22 @@
     const complimentDiv = document.getElementById('compliment');
     const bgMusic = document.getElementById('bgMusic');
 
+    // Start slideshow and music
     function startSlideshow() {
-      // Play music (works on Chrome)
-      bgMusic.play().catch(e => console.log('Music blocked until user interacts'));
+        // Play music (works on Chrome)
+        bgMusic.play().catch(e => console.log("Music blocked until user interacts"));
 
-      // Hide start screen
-      document.getElementById('startScreen').style.opacity = 0;
-      setTimeout(() => {
-        document.getElementById('startScreen').style.display = 'none';
-        document.getElementById('slideshow').style.opacity = 1;
-        document.getElementById('slideshow').style.pointerEvents = 'auto';
-        showSlide();
-      }, 1000);
+        // Hide start screen
+        document.getElementById('startScreen').style.opacity = 0;
+        setTimeout(() => {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('slideshow').style.opacity = 1;
+            document.getElementById('slideshow').style.pointerEvents = 'auto';
+            showSlide();
+        }, 1000);
     }
 
+    // Show slideshow
     function showSlide() {
       if(currentIndex < photos.length) {
         slideImage.style.opacity = 0;
@@ -102,6 +105,7 @@
       }
     }
 
+    // End screen
     function endScreen() {
       document.getElementById('slideshow').style.opacity = 0;
       document.getElementById('slideshow').style.pointerEvents = 'none';
